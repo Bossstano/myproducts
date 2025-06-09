@@ -1,0 +1,48 @@
+<div class="container">
+    <div>
+        <h2>
+            Ajouter un nouveau produit
+        </h2>
+    </div>
+    <form action="">
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID Produit</label>
+            <input type="text" class="form-control" name="idProduct" [(ngModel)]="newProduct.idProduct">
+        </div>
+
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nom Produit</label>
+            <input type="text" class="form-control" name="nameProduct" [(ngModel)]="newProduct.nameProduct">
+        </div>
+
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Prix Produit</label>
+            <input type="number" class="form-control" name="priceProduct" [(ngModel)]="newProduct.priceProduct">
+        </div>
+
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Date de creation</label>
+            <input type="date" class="form-control" name="dateCreation" [(ngModel)]="newProduct.dateCreation">
+        </div>
+
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Categorie</label>
+            <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="newIdCategory">
+                @for(category of categories; track category.idCategory){
+                <option [value]="category.idCategory"> {{category.nameCategory}} </option>
+                }
+            </select>
+        </div>
+
+        <div class="mt-2">
+            <button type="submit" (click)="addProduct()" class="btn btn-success">Ajouter</button>
+        </div>
+
+        <div>
+            <h3>
+                {{message}}
+            </h3>
+        </div>
+
+    </form>
+</div>

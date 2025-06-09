@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                    <tr>
+                        <th>Numéro</th>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Date d'ajout</th>
+                        <th>Catégorie</th>
+                        <th>Action</th>
+                    </tr>
+                <!-- <tbody *ngFor="let product of products">
+                    <tr>
+                        <td>{{product}}</td>
+                    </tr>
+                </tbody> -->
+                @for (product of products; track product.idProduct; let index = $index; let nombre = $count; let first =
+                $first; let last = $last) {
+                @if(first) {
+                <h3>Nombre total : {{nombre}}</h3>
+                }
+                <tbody>
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>{{product.idProduct}}</td>
+                        <td>{{product.nameProduct}}</td>
+                        <td>{{product.priceProduct}}</td>
+                        <td>{{product.dateCreation | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{product.category.nameCategory}}</td>
+                        <td><a class="btn btn-danger" (click)="deleteProduct(product)">Supprimer</a>
+                        <a class="btn btn-success" [routerLink]="['/update-product',product.idProduct]">Modifier</a>
+                    </td> 
+                    </tr>
+                </tbody>
+                @if(last) {
+                <h3>Tous les éléments sont affichés</h3>
+                }
+                }
+                @empty {
+                <tbody>
+                    <tr>
+                        <td colspan="4" class="text-center">Aucun produit trouvé</td>
+                    </tr>
+                </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</div>
