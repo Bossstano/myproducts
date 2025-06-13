@@ -21,15 +21,19 @@ export class UpdateProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categories = this.productService.listCategories();
-    this.currentProduct = this.productService.getProductById(+this.activatedRoute.snapshot.params['id']);
-    console.log("Current Product: ", this.currentProduct);
+    // this.categories = this.productService.listCategories();
+    // this.currentProduct = this.productService.getProductById(+this.activatedRoute.snapshot.params['id']);
+    // console.log("Current Product: ", this.currentProduct);
+    this.productService.getProductById(+this.activatedRoute.snapshot.params['id']).subscribe(product => {
+      this.currentProduct = product;
+      console.log("Current Product: ", this.currentProduct);
+    });
   }
 
   updateProduct() {
-    this.currentProduct.category = this.productService.getCategoryById(this.updateIdCategory);
-    this.productService.updateProduct(this.currentProduct);
-    alert("Product updated successfully!");
-    this.router.navigate(['/products']);
+    // this.currentProduct.category = this.productService.getCategoryById(this.updateIdCategory);
+    this.productService.updateProduct(this.currentProduct).subscribe(product => {this.router.navigate(['/products']);});
+    // alert("Product updated successfully!");
+    // this.router.navigate(['/products']);
   }
 }

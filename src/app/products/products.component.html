@@ -8,7 +8,7 @@
                         <th>Nom</th>
                         <th>Prix</th>
                         <th>Date d'ajout</th>
-                        <th>Catégorie</th>
+                        <!-- <th>Catégorie</th> -->
                         <th>Action</th>
                     </tr>
                 <!-- <tbody *ngFor="let product of products">
@@ -16,21 +16,21 @@
                         <td>{{product}}</td>
                     </tr>
                 </tbody> -->
-                @for (product of products; track product.idProduct; let index = $index; let nombre = $count; let first =
+                @for (product of products; track product.id; let index = $index; let nombre = $count; let first =
                 $first; let last = $last) {
-                @if(first) {
+                <!-- @if(first) {
                 <h3>Nombre total : {{nombre}}</h3>
-                }
+                } -->
                 <tbody>
                     <tr>
                         <td>{{index + 1}}</td>
-                        <td>{{product.idProduct}}</td>
-                        <td>{{product.nameProduct}}</td>
-                        <td>{{product.priceProduct}}</td>
-                        <td>{{product.dateCreation | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{product.category.nameCategory}}</td>
+                        <td>{{product.id}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.creationDate | date: 'dd/MM/yyyy'}}</td>
+                        <!-- <td>{{product.category.nameCategory}}</td> -->
                         <td><a class="btn btn-danger" (click)="deleteProduct(product)">Supprimer</a>
-                        <a class="btn btn-success" [routerLink]="['/update-product',product.idProduct]">Modifier</a>
+                        <a class="btn btn-success" [routerLink]="['/update-product',product.id]">Modifier</a>
                     </td> 
                     </tr>
                 </tbody>

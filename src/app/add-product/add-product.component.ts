@@ -24,15 +24,19 @@ export class AddProductComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
-    this.categories = this.productService.listCategories();
+    // this.categories = this.productService.listCategories();
   }
 
   addProduct() {
-    this.newCategory = this.productService.getCategoryById(this.newIdCategory);
-    this.newProduct.category = this.newCategory;
-    //console.log("New Product: ", this.newProduct);
-    this.productService.addProduct(this.newProduct);
-    this.message = "Product " + this.newProduct.nameProduct + " added successfully!";
+    this.productService.addProduct(this.newProduct).subscribe(product => {
+      console.log("Product added: ", product);
+    });
+    
+    // this.newCategory = this.productService.getCategoryById(this.newIdCategory);
+    // this.newProduct.category = this.newCategory;
+    // //console.log("New Product: ", this.newProduct);
+    // this.productService.addProduct(this.newProduct);
+    this.message = "Product " + this.newProduct.name + " added successfully!";
     this.router.navigate(['products']);
   }
 

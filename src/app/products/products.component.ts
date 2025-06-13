@@ -18,14 +18,23 @@ export class ProductsComponent implements OnInit {
     //this.products = [];
   }
 
-  ngOnInit(): void {   
-    this.products = this.productService.listProducts();
+  ngOnInit(): void {  
+    this.listProducts();
+  }
+
+  listProducts() {
+    this.productService.listProducts().subscribe(products => {
+      console.log("Products: ", products);
+      this.products = products;});
   }
 
   deleteProduct(product: Product) {
-    let confirmation = confirm("Are you sure you want to delete the product: " + product.nameProduct + "?");
+    let confirmation = confirm("Are you sure you want to delete the product: " + product.name + "?");
     if (confirmation) {
-      this.productService.deleteProduct(product);
+      this.productService.deleteProduct(product.id).subscribe(() => {
+        console.log("Product deleted: ", product);
+        this.listProducts();
+      });
     }   
 }
 }
