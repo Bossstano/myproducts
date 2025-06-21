@@ -25,14 +25,14 @@
             <input type="date" class="form-control" name="dateCreation" [(ngModel)]="newProduct.creationDate">
         </div>
 
-        <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Categorie</label>
             <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="newIdCategory">
-                @for(category of categories; track category.idCategory){
-                <option [value]="category.idCategory"> {{category.nameCategory}} </option>
+                @for(category of categories; track category.id){
+                <option [value]="category.id"> {{category.name}} </option>
                 }
             </select>
-        </div> -->
+        </div>
 
         <div class="mt-2">
             <button type="submit" (click)="addProduct()" class="btn btn-success">Ajouter</button>

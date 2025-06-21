@@ -3,6 +3,7 @@ import { Product } from '../model/product.model';
 import { Category } from '../model/category.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,7 +19,7 @@ export class ProductService {
   // products: Product[];
   product!: Product;
   // categories: Category[];
-  apiUrl: string = 'http://localhost:8080/products/api'; // Example API URL
+  // Example API URL
 
   constructor(private http: HttpClient) {
     // /* /* this.categories = [ {
@@ -50,17 +51,17 @@ export class ProductService {
   }
 
   listProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Product[]>(environment.apiUrl);
     // return this.products;
   }
 
   addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product, httpOptions);
+    return this.http.post<Product>(environment.apiUrl, product, httpOptions);
     /* this.products.push(product); */
   }
 
   deleteProduct(productId: number) {
-    const url = `${this.apiUrl}/${productId}`;
+    const url = `${environment.apiUrl}/${productId}`;
     return this.http.delete(url, httpOptions);
     /* const index = this.products.indexOf(product, 0);
     if (index > -1) {
@@ -69,7 +70,7 @@ export class ProductService {
   }
 
   getProductById(productId: number): Observable<Product> {
-    const url = `${this.apiUrl}/${productId}`;
+    const url = `${environment.apiUrl}/${productId}`;
     return this.http.get<Product>(url);
     /* this.product = this.products.find(product => product.idProduct === id)!;
     return this.product; */
@@ -82,14 +83,25 @@ export class ProductService {
       this.products.splice(index, 1);
       this.products.splice(index, 0, product);
     } */
-   return this.http.put<Product>(this.apiUrl, product, httpOptions);
+   return this.http.put<Product>(environment.apiUrl, product, httpOptions);
   }
 
-  /* listCategories(): Category[] {
-    return this.categories;
+   listCategories(): Observable<Category[]> {
+    const url = `${environment.apiUrl}/category`;
+    return this.http.get<Category[]>(url);
   }
 
-  getCategoryById(id: number): Category {
+  /* getCategoryById(id: number): Category {
     return this.categories.find(category => category.idCategory == id)!;
-  } */
+  } */ 
+
+ searchProductByCategory(categoryId: number): Observable<Product[]> {
+    const url = `${environment.apiUrl}/prodsCat/${categoryId}`;
+    return this.http.get<Product[]>(url);
+  }
+
+  searchProductByName(name: string): Observable<Product[]> {
+    const url = `${environment.apiUrl}/prodsByName/${name}`;
+    return this.http.get<Product[]>(url);
+  }
 }

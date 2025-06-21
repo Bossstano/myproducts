@@ -24,16 +24,21 @@ export class UpdateProductComponent implements OnInit {
     // this.categories = this.productService.listCategories();
     // this.currentProduct = this.productService.getProductById(+this.activatedRoute.snapshot.params['id']);
     // console.log("Current Product: ", this.currentProduct);
+    this.productService.listCategories().subscribe(categories => {
+      this.categories = categories;
+      console.log("Categories: ", categories);
+    });
     this.productService.getProductById(+this.activatedRoute.snapshot.params['id']).subscribe(product => {
-      this.currentProduct = product;
+      this.currentProduct = product; this.updateIdCategory = product.category.id;
+      console.log("Update ID Category: ", this.updateIdCategory);
       console.log("Current Product: ", this.currentProduct);
     });
   }
 
   updateProduct() {
-    // this.currentProduct.category = this.productService.getCategoryById(this.updateIdCategory);
+    this.currentProduct.category = this.categories.find(category => category.id == this.updateIdCategory)!;
     this.productService.updateProduct(this.currentProduct).subscribe(product => {this.router.navigate(['/products']);});
-    // alert("Product updated successfully!");
+    alert("Product updated successfully!");
     // this.router.navigate(['/products']);
   }
 }

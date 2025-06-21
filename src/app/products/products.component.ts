@@ -6,26 +6,27 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
 
-  products? : Product[];
+  products!: Product[];
 
-  constructor(private productService: ProductService) { 
+  constructor(private productService: ProductService) {
     //this.products = [];
   }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.listProducts();
   }
 
   listProducts() {
     this.productService.listProducts().subscribe(products => {
       console.log("Products: ", products);
-      this.products = products;});
+      this.products = products;
+    });
   }
 
   deleteProduct(product: Product) {
@@ -35,6 +36,6 @@ export class ProductsComponent implements OnInit {
         console.log("Product deleted: ", product);
         this.listProducts();
       });
-    }   
-}
+    }
+  }
 }

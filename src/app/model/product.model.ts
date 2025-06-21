@@ -5,5 +5,5 @@ export class Product {
         name! : string;
         price! : number;
         creationDate!: Date;
-        // category!: Category;
+        category!: Category;
 }
