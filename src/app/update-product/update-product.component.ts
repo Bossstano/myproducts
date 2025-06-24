@@ -29,7 +29,7 @@ export class UpdateProductComponent implements OnInit {
       console.log("Categories: ", categories);
     });
     this.productService.getProductById(+this.activatedRoute.snapshot.params['id']).subscribe(product => {
-      this.currentProduct = product; this.updateIdCategory = product.category.id;
+      this.currentProduct = product; this.updateIdCategory = this.currentProduct.category.id!;
       console.log("Update ID Category: ", this.updateIdCategory);
       console.log("Current Product: ", this.currentProduct);
     });

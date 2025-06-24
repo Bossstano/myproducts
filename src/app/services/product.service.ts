@@ -104,4 +104,9 @@ export class ProductService {
     const url = `${environment.apiUrl}/prodsByName/${name}`;
     return this.http.get<Product[]>(url);
   }
+
+  addCategory(category: Category): Observable<Category> {
+    const url = `${environment.apiUrl}/category`;
+    return this.http.post<Category>(url, category, httpOptions);
+  }
 }
