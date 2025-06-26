@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../model/product.model';
 import { ProductService } from '../services/product.service';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +15,7 @@ export class ProductsComponent implements OnInit {
 
   products!: Product[];
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,public authService: AuthService) {
     //this.products = [];
   }
 

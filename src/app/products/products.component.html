@@ -2,15 +2,15 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <table class="table table-striped">
-                    <tr>
-                        <th>Numéro</th>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Prix</th>
-                        <th>Date d'ajout</th>
-                        <th>Catégorie</th>
-                        <th>Action</th>
-                    </tr>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Date d'ajout</th>
+                    <th>Catégorie</th>
+                    <th>Action</th>
+                </tr>
                 <!-- <tbody *ngFor="let product of products">
                     <tr>
                         <td>{{product}}</td>
@@ -18,9 +18,9 @@
                 </tbody> -->
                 @for (product of products; track product.id; let index = $index; let nombre = $count; let first =
                 $first; let last = $last) {
-                 @if(first) {
+                @if(first) {
                 <h3>Nombre total : {{nombre}}</h3>
-                } 
+                }
                 <tbody>
                     <tr>
                         <td>{{index + 1}}</td>
@@ -29,9 +29,11 @@
                         <td>{{product.price}}</td>
                         <td>{{product.creationDate | date: 'dd/MM/yyyy'}}</td>
                         <td>{{product.category.name}}</td>
+                        @if(authService.isAdmin()) {
                         <td><a class="btn btn-danger" (click)="deleteProduct(product)">Supprimer</a>
-                        <a class="btn btn-success" [routerLink]="['/update-product',product.id]">Modifier</a>
-                    </td> 
+                            <a class="btn btn-success" [routerLink]="['/update-product',product.id]">Modifier</a>
+                        </td>
+                        }
                     </tr>
                 </tbody>
                 @if(last) {
